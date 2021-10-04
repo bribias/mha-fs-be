@@ -14,7 +14,7 @@ describe('demo routes', () => {
       alias: 'Kacchan',
       quirk: 'explosion',
     };
-    const res = await request(app).post('/api/v1/heros').send(character);
+    const res = await request(app).post('/api/v1/heroes').send(character);
 
     expect(res.body).toEqual({ id: '1', ...character });
   });
@@ -24,7 +24,7 @@ describe('demo routes', () => {
       alias: 'Kacchan',
       quirk: 'explosion',
     });
-    const res = await request(app).get(`/api/v1/heros/${character.id}`);
+    const res = await request(app).get(`/api/v1/heroes/${character.id}`);
 
     expect(res.body).toEqual(character);
   });
@@ -39,7 +39,7 @@ describe('demo routes', () => {
       alias: 'Deku',
       quirk: 'one for all',
     });
-    const res = await request(app).get('/api/v1/heros');
+    const res = await request(app).get('/api/v1/heroes');
 
     expect(res.body).toEqual([character1, character2]);
   });
@@ -56,7 +56,7 @@ describe('demo routes', () => {
       quirk: 'explosion',
     });
     const res = await request(app)
-      .put(`/api/v1/heros/${character.id}`)
+      .put(`/api/v1/heroes/${character.id}`)
       .send(deku);
     expect(res.body).toEqual({ id: '1', ...deku });
   });
@@ -67,7 +67,7 @@ describe('demo routes', () => {
       alias: 'Kacchan',
       quirk: 'explosion',
     });
-    const res = await request(app).delete(`/api/v1/heros/${character.id}`);
+    const res = await request(app).delete(`/api/v1/heroes/${character.id}`);
 
     expect(res.body).toEqual({
       message: `${character.name} has been defeated`,
