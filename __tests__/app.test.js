@@ -8,69 +8,69 @@ describe('demo routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
-  it('creates a character via POST', async () => {
-    const character = {
+  it('creates a hero via POST', async () => {
+    const hero = {
       name: 'Katsuki Bakgugo',
       alias: 'Kacchan',
       quirk: 'explosion',
     };
-    const res = await request(app).post('/api/v1/heroes').send(character);
+    const res = await request(app).post('/api/v1/heroes').send(hero);
 
-    expect(res.body).toEqual({ id: '1', ...character });
+    expect(res.body).toEqual({ id: '1', ...hero });
   });
-  it('gets a character by id', async () => {
-    const character = await Hero.insert({
+  it('gets a hero by id', async () => {
+    const hero = await Hero.insert({
       name: 'Katsuki Bakugo',
       alias: 'Kacchan',
       quirk: 'explosion',
     });
-    const res = await request(app).get(`/api/v1/heroes/${character.id}`);
+    const res = await request(app).get(`/api/v1/heroes/${hero.id}`);
 
-    expect(res.body).toEqual(character);
+    expect(res.body).toEqual(hero);
   });
-  it('gets all character', async () => {
-    const character1 = await Hero.insert({
+  it('gets all hero', async () => {
+    const hero1 = await Hero.insert({
       name: 'Katsuki Bakugo',
       alias: 'Kacchan',
       quirk: 'explosion',
     });
-    const character2 = await Hero.insert({
+    const hero2 = await Hero.insert({
       name: 'Izuku Midoriya',
       alias: 'Deku',
       quirk: 'one for all',
     });
     const res = await request(app).get('/api/v1/heroes');
 
-    expect(res.body).toEqual([character1, character2]);
+    expect(res.body).toEqual([hero1, hero2]);
   });
 
-  it('updates a character by id via PUT', async () => {
+  it('updates a hero by id via PUT', async () => {
     const deku = {
       name: 'Izuku Midoriya',
       alias: 'Deku',
       quirk: 'one for all',
     };
-    const character = await Hero.insert({
+    const hero = await Hero.insert({
       name: 'Katsuki Bakugo',
       alias: 'Kacchan',
       quirk: 'explosion',
     });
     const res = await request(app)
-      .put(`/api/v1/heroes/${character.id}`)
+      .put(`/api/v1/heroes/${hero.id}`)
       .send(deku);
     expect(res.body).toEqual({ id: '1', ...deku });
   });
 
-  it('deletes a character', async () => {
-    const character = await Hero.insert({
+  it('deletes a hero', async () => {
+    const hero = await Hero.insert({
       name: 'Katsuki Bakugo',
       alias: 'Kacchan',
       quirk: 'explosion',
     });
-    const res = await request(app).delete(`/api/v1/heroes/${character.id}`);
+    const res = await request(app).delete(`/api/v1/heroes/${hero.id}`);
 
     expect(res.body).toEqual({
-      message: `${character.name} has been defeated`,
+      message: `${hero.name} has been defeated`,
     });
   });
 });
